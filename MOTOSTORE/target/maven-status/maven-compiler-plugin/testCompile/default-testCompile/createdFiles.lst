@@ -1,0 +1,5 @@
+vn\edu\vtc\ValidationPassword.class
+vn\edu\vtc\AppTest.class
+vn\edu\vtc\Md5Test.class
+vn\edu\vtc\DALTest.class
+vn\edu\vtc\UserBLTest.class

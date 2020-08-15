@@ -1,0 +1,7 @@
+vn\edu\vtc\App.class
+vn\edu\vtc\bl\UserBL.class
+vn\edu\vtc\bl\Validation.class
+vn\edu\vtc\dal\DBUtil.class
+vn\edu\vtc\bl\Md5.class
+vn\edu\vtc\dal\UserDAL.class
+vn\edu\vtc\persitance\User.class
