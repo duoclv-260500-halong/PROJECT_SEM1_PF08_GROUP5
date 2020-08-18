@@ -11,7 +11,7 @@ import org.junit.Test;
 import vn.edu.vtc.dal.UserDAL;
 import vn.edu.vtc.persitance.User;
 
-public class DALTest {
+public class UserDALTest {
     @Test
     public void testLogin1() {
         UserDAL userDAL = new UserDAL();
