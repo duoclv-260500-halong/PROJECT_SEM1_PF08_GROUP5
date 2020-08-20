@@ -2,6 +2,7 @@ package vn.edu.vtc;
 
 import vn.edu.vtc.bl.ProductBL;
 import vn.edu.vtc.bl.UserBL;
+import vn.edu.vtc.persitance.Customer;
 import vn.edu.vtc.persitance.Product;
 import vn.edu.vtc.persitance.User;
 
@@ -30,6 +31,7 @@ public class App {
         menuInsert.add("4. Insert Gloves");
         menuInsert.add("0. Exit");
         checkLogin();
+
         int choice = printMenu(mainMenu, 4);
         switch (choice) {
             case 1: {
@@ -37,7 +39,18 @@ public class App {
                 insertProduct(choice1);
                 break;
             }
-            
+            case 2: {
+                updateProduct();
+                break;
+            }
+            case 3: {
+
+                createOrder();
+                break;
+            }
+            case 4: {
+                
+            }
         }
     }
 
@@ -60,29 +73,40 @@ public class App {
 
     public static User checkLogin() throws SQLException {
         User user = new User();
+        UserBL userBL = new UserBL();
         while (true) {
             System.out.print("Input username: ");
             String username = scanner.nextLine();
             if (username.equals("")) {
-                System.out.println("Username not correct type");
+                System.out.println("Username not correct");
                 continue;
             }
             Console console = System.console();
             char[] passwordArray = console.readPassword("Input password: ");
             String password = new String(passwordArray);
-            UserBL userBL = new UserBL();
+            if(password.equals("")){
+                System.out.println("Password not correct");
+                continue;
+            }
+            
             user = userBL.getUser(username, password);
             if (user != null) {
                 System.out.println("Login successfully");
-
                 break;
             } else {
-                System.out.println("Login failed");
+                System.out.println("Username or Password not correct");
             }
         }
         return user;
     }
 
+    
+    // public static void getByName(String nameProduct){
+    //     ProductBL productBL = new ProductBL();
+    //     Scanner scanner = new Scanner(System.in);
+    //     System.out.print("Name Product: ");
+    //     nameProduct = scanner.nextLine();
+    // }
     public static void insertProduct(int choice1) {
         Product product = new Product();
         ProductBL productBL = new ProductBL();
@@ -118,7 +142,7 @@ public class App {
             System.out.print("Time Warranty: ");
             product.setTimeWarranty(scanner.nextLine());
             if (productBL.insertProductBL(product)) {
-                System.out.println("Insert completed!");
+                System.out.println("Insert completed!"); 
             } else {
                 System.out.println("Insert failed!");
             }
@@ -130,19 +154,60 @@ public class App {
         
 
     }
-
-    public static boolean updateProduct() {
-
-        return true;
+    
+    public static void updateProduct() {
+        
+        
     }
 
-    public static boolean insertOrder() {
+    public static void createOrder() {
+        
+        //insert customer
+        insertCustomer();
+        //insert products
+        insertProductToOrder();
 
-        return true;
     }
 
-    public static boolean updateOrder() {
-
-        return true;
+    public static Customer insertCustomer(){
+        Customer customer = new Customer();
+        System.out.print("Name Customer: ");
+        customer.setCustomerName(scanner.nextLine());
+        System.out.print("Address Customer: ");
+        customer.setCustomerAddress(scanner.nextLine());
+        System.out.print("Phone Number: ");
+        customer.setPhoneNumber(scanner.nextLine());
+        System.out.print("Identity Card: ");
+        customer.setIdentityCard(scanner.nextLine());
+        return customer;
     }
+
+    public static Product insertProductToOrder(){
+        
+        System.out.print("Name Product: ");
+        String productName = scanner.nextLine();
+        Product product = getByName(productName);
+        if(product != null){
+            System.out.print("Input quantity: ");
+            int quantity = Integer.parseInt(scanner.nextLine());        
+        
+        }
+            
+        return product;
+    }
+
+    public static Product getByName(String productName){
+        Product product = new Product();
+        ProductBL productBL = new ProductBL();
+        product = productBL.getByName(productName);
+        if(product != null){
+            System.out.println("Sản phẩm đã tìm thấy");
+            return product;
+        }
+        else{
+            System.out.println("Không tìm thấy sản phẩm");
+            return null;
+        }
+    }
+    
 }

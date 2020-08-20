@@ -2,6 +2,7 @@ package vn.edu.vtc.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import vn.edu.vtc.persitance.Product;
 
@@ -23,5 +24,28 @@ public class ProductDAL {
         } catch (Exception e) {
             return 0; 
         }
+    }
+
+    public Product getProductByName(String productName){
+        Product product = new Product();
+        try (Connection con = DBUtil.getConnection();
+        PreparedStatement pstm = con.prepareStatement("select * from Products where productName = ?");) {
+        pstm.setString(1, productName);
+        ResultSet rs = pstm.executeQuery();
+
+        if(rs.next()){
+            product.setProductName(rs.getString("productName"));
+            product.setDescription(rs.getString("description"));
+            product.setPrice(rs.getLong("price"));
+            product.setSize(rs.getString("size"));
+            product.setColor(rs.getString("color"));
+            product.setTimeWarranty(rs.getString("timeWarranty"));
+            return product;
+        }
+       
+        } catch (Exception e) {
+            return null;
+        }
+        return null;
     }
 }

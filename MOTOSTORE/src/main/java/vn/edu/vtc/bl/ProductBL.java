@@ -8,4 +8,8 @@ public class ProductBL {
     public boolean insertProductBL(Product product){
         return productDAL.insertProductDAL(product) > 0;
     }
+
+    public Product getByName(String productName){
+        return productDAL.getProductByName(productName);
+    }
 }

@@ -1,6 +1,7 @@
 package vn.edu.vtc.bl;
 
 import vn.edu.vtc.dal.UserDAL;
+
 import vn.edu.vtc.persitance.User;
 
 public class UserBL {
@@ -20,4 +21,6 @@ public class UserBL {
         }
         return user;
     }
+
+
 }
