@@ -26,6 +26,21 @@ public class ProductDAL {
         }
     }
 
+    public int updateProductDAL(Product product, String productName){
+        try (Connection con = DBUtil.getConnection();
+        PreparedStatement pstm = con.prepareStatement("Update Products set productName = ?, description = ?, price = ?, size = ?, color = ?, timeWarranty = ? where productName = ?" );){
+            pstm.setString(1, product.getProductName());
+            pstm.setString(2, product.getDescription());
+            pstm.setLong(3, product.getPrice());
+            pstm.setString(4, product.getSize());
+            pstm.setString(5, product.getColor());
+            pstm.setString(6, product.getTimeWarranty());
+            pstm.setString(7, productName);
+            return pstm.executeUpdate();    
+        } catch (Exception e) {
+            return 0;
+        }
+    }
     public Product getProductByName(String productName){
         Product product = new Product();
         try (Connection con = DBUtil.getConnection();
