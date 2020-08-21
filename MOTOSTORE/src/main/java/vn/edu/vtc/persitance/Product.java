@@ -8,6 +8,7 @@ public class Product {
     private String color;
     private String timeWarranty;
     private int categoryID;
+    private int quantity;
     
     public String getProductName() {
         return productName;
@@ -68,8 +69,16 @@ public class Product {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
+
         return super.toString();
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
 }
