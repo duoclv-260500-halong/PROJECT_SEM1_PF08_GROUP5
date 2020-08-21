@@ -1,8 +1,9 @@
 package vn.edu.vtc;
-
+import vn.edu.vtc.bl.OrderBL;
 import vn.edu.vtc.bl.ProductBL;
 import vn.edu.vtc.bl.UserBL;
 import vn.edu.vtc.persitance.Customer;
+import vn.edu.vtc.persitance.Order;
 import vn.edu.vtc.persitance.Product;
 import vn.edu.vtc.persitance.User;
 
@@ -156,21 +157,72 @@ public class App {
     }
     
     public static void updateProduct() {
-        
-        
+        Product product = new Product();
+        ProductBL productBL = new ProductBL();
+        while (true) {
+            System.out.print("Nhap san pham can tim: ");
+            String productName = scanner.nextLine();
+            
+            product = productBL.getByName(productName);
+            if (product != null) {
+                try {
+                    System.out.print("Product Name: ");
+                    product.setProductName(scanner.nextLine());
+                    System.out.print("Description: ");
+                    product.setDescription(scanner.nextLine());
+                    System.out.print("Price: ");
+                    product.setPrice(Long.valueOf(scanner.nextLine()));
+                    System.out.print("Size: ");
+                    product.setSize(scanner.nextLine());
+                    System.out.print("Color: ");
+                    product.setColor(scanner.nextLine());
+                    System.out.print("Time Warranty: ");
+                    product.setTimeWarranty(scanner.nextLine());
+                    if (productBL.updateProductBL(product, productName)) {
+                        System.out.println("Update completed!");
+                        break;
+                    } else {
+                        System.out.println("Update failed!");
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Update failed!");
+                }
+            } else {
+                System.out.print("Product not found \n");
+            }
+        }
     }
 
     public static void createOrder() {
-        
+        Order order = new Order();
+        Customer customer = new Customer();
         //insert customer
-        insertCustomer();
+        customer = insertCustomer();
+        order.setCustomer(customer);
         //insert products
-        insertProductToOrder();
+        do{
+            order.addProduct(insertProductToOrder());
+            System.out.print("Do you want to add another products? (Yes/No): ");
+            String confirm = scanner.nextLine();
+            if(confirm.equalsIgnoreCase("no")){
+                break;
+            }
+        }while(true);
+        OrderBL orderBL = new OrderBL();
+        if(orderBL.insertOrder(order)){
+            System.out.println("Insert completed");
+        }
+        else{
+            System.out.println("Insert failed");
+
+        }
 
     }
 
     public static Customer insertCustomer(){
         Customer customer = new Customer();
+        
         System.out.print("Name Customer: ");
         customer.setCustomerName(scanner.nextLine());
         System.out.print("Address Customer: ");
@@ -179,20 +231,18 @@ public class App {
         customer.setPhoneNumber(scanner.nextLine());
         System.out.print("Identity Card: ");
         customer.setIdentityCard(scanner.nextLine());
-        return customer;
+    return customer;
     }
 
     public static Product insertProductToOrder(){
-        
         System.out.print("Name Product: ");
         String productName = scanner.nextLine();
         Product product = getByName(productName);
         if(product != null){
             System.out.print("Input quantity: ");
             int quantity = Integer.parseInt(scanner.nextLine());        
-        
+            product.setQuantity(quantity);
         }
-            
         return product;
     }
 
@@ -201,11 +251,11 @@ public class App {
         ProductBL productBL = new ProductBL();
         product = productBL.getByName(productName);
         if(product != null){
-            System.out.println("Sản phẩm đã tìm thấy");
+            System.out.println("Product found");
             return product;
         }
         else{
-            System.out.println("Không tìm thấy sản phẩm");
+            System.out.println("Product not found");
             return null;
         }
     }
