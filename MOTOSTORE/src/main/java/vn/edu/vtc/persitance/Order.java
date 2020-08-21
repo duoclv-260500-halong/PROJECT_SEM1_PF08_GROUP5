@@ -1,6 +1,7 @@
 package vn.edu.vtc.persitance;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -11,6 +12,10 @@ public class Order {
     private Customer customer;
     private List<Product> products;
 
+    public Order(){
+        customer = null;
+        products = new ArrayList<>();
+    }
     public int getOrderID() {
         return orderID;
     }
@@ -59,4 +64,10 @@ public class Order {
         this.products = products;
     }
     
+    public void addProduct(Product product){
+        if(products == null){
+            products = new ArrayList<>();
+        }
+        products.add(product);
+    }
 }
