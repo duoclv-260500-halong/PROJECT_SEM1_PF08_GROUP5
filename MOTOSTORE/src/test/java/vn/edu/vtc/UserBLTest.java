@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import vn.edu.vtc.bl.UserBL;
-import vn.edu.vtc.persitance.User;
+import vn.edu.vtc.persistance.User;
 
 public class UserBLTest {
     @Test
