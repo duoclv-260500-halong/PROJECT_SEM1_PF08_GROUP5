@@ -1,6 +1,6 @@
 package vn.edu.vtc.dal;
 
-import vn.edu.vtc.persitance.User;
+import vn.edu.vtc.persistance.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +19,8 @@ public class UserDAL {
             ResultSet rs = pstm.executeQuery();
             
             if (rs.next()) {
+                user.setUsername(rs.getString("username"));;
+                user.setPassword(rs.getString("pass"));
                 return user;
             } else {
                 return null;
