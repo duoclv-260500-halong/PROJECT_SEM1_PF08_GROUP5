@@ -4,13 +4,28 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import vn.edu.vtc.persitance.Customer;
-import vn.edu.vtc.persitance.Order;
-import vn.edu.vtc.persitance.Product;
+import vn.edu.vtc.persistance.Customer;
+import vn.edu.vtc.persistance.Order;
+import vn.edu.vtc.persistance.Product;
 
 public class OrderDAL {
-    
+    public Order getByID(int orderID){
+        Order order = new Order();
+        Customer customer = new Customer();
+        try (Connection con = DBUtil.getConnection();
+        PreparedStatement pstm = con.prepareStatement("select * from Orders where orderID = " + orderID);){
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                order.setOrderID(rs.getInt("orderID"));
+                customer.setCustomerID(rs.getInt("customerID"));
+                order.setCustomer(customer);
+                return order;
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return order;
+    }
     public int insertOrder(Order order){
         if(order.getProducts() == null || order.getProducts().isEmpty()){
             return 0;
@@ -28,6 +43,7 @@ public class OrderDAL {
                 if(pstm.executeUpdate() <= 0){
                     throw new SQLException();
                 }             
+
             } catch (Exception e) {
                 connection.rollback();
                 return 0;
@@ -90,6 +106,6 @@ public class OrderDAL {
             return 0;
         }
         return 1;
-
     }
+    
 }
