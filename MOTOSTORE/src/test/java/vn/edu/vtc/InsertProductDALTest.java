@@ -5,19 +5,19 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import vn.edu.vtc.dal.ProductDAL;
-import vn.edu.vtc.persitance.Product;
+import vn.edu.vtc.persistance.Product;
 
 public class InsertProductDALTest {
     @Test
     public void insertProductDALTest1(){
         ProductDAL productDAL = new ProductDAL();
         Product product = new Product();
-        product.setProductName("productName1"); //name is unique
+        product.setProductName("productName1"); //name is primary key
         product.setDescription("description1. description2. description3.");
         product.setPrice(100000000); //Price haven to numbers
         product.setSize("length x width x height 200 x 50 x 90");
-        product.setColor("productName");
-        product.setTimeWarranty("productName");
+        product.setColor("black");
+        product.setTimeWarranty("12 thang");
         product.setCategoryID(1); //ID 1-4
         int result = productDAL.insertProductDAL(product);
         int expected = 1;
