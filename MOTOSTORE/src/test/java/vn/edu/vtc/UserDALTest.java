@@ -9,15 +9,15 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import vn.edu.vtc.dal.UserDAL;
-import vn.edu.vtc.persitance.User;
+import vn.edu.vtc.persistance.User;
 
 public class UserDALTest {
     @Test
     public void testLogin1() {
         UserDAL userDAL = new UserDAL();
         try {
-            User user1 = userDAL.checkUser("dongduclan", "680e07d8a4d196db69674a23a89b2185");
-            String[] result = { user1.getUsername(), user1.getPassword() };
+            User user = userDAL.checkUser("dongduclan", "680e07d8a4d196db69674a23a89b2185");
+            String[] result = { user.getUsername(), user.getPassword() };
             String[] expected = { "dongduclan", "680e07d8a4d196db69674a23a89b2185" };
             assertTrue(Arrays.equals(result, expected));
         } catch (Exception e) {
