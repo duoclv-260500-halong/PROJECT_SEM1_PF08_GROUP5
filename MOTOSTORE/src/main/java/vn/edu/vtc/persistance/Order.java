@@ -2,7 +2,6 @@ package vn.edu.vtc.persistance;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Order {
     private int orderID;
