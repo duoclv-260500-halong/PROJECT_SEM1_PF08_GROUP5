@@ -1,7 +1,7 @@
 package vn.edu.vtc.bl;
 
 import vn.edu.vtc.dal.ProductDAL;
-import vn.edu.vtc.persitance.Product;
+import vn.edu.vtc.persistance.Product;
 
 public class ProductBL {
     ProductDAL productDAL = new ProductDAL();
