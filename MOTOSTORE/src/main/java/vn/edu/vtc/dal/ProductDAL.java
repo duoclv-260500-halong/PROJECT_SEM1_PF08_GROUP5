@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import vn.edu.vtc.persitance.Product;
+import vn.edu.vtc.persistance.Product;
 
 
 public class ProductDAL {
