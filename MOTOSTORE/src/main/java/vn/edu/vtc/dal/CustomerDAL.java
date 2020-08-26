@@ -8,11 +8,11 @@ import vn.edu.vtc.persistance.Customer;
 
 public class CustomerDAL {
 
-    public Customer getCustomer(String customerID){
+    public Customer getCustomer(int customerID){
         Customer customer = new Customer();
         try (Connection connection = DBUtil.getConnection();
         PreparedStatement pstm = connection.prepareStatement("select * from customers where customerID = ?;");){
-            pstm.setString(1, customerID);
+            pstm.setInt(1, customerID);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
                 customer.setCustomerName(rs.getString("customerName"));
@@ -28,7 +28,7 @@ public class CustomerDAL {
         }
     }
 
-    public int updateCustomer(Customer customer, String customerID){
+    public int updateCustomer(Customer customer, int customerID){
         try (Connection connection = DBUtil.getConnection();
         PreparedStatement pstm = connection.prepareStatement("Update customers set customerName = ? , customerAddress = ?, phoneNumber = ?, identityCard = ? where customerID = "+customerID);){
             pstm.setString(1, customer.getCustomerName());
