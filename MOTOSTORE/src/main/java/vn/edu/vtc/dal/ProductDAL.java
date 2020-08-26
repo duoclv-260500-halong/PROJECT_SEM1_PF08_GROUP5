@@ -47,17 +47,16 @@ public class ProductDAL {
         PreparedStatement pstm = con.prepareStatement("select * from Products where productName = ?");) {
         pstm.setString(1, productName);
         ResultSet rs = pstm.executeQuery();
-
         if(rs.next()){
             product.setProductName(rs.getString("productName"));
             product.setDescription(rs.getString("description"));
             product.setPrice(rs.getLong("price"));
             product.setSize(rs.getString("size"));
             product.setColor(rs.getString("color"));
+            product.setCategoryID(rs.getInt("categoryID"));
             product.setTimeWarranty(rs.getString("timeWarranty"));
             return product;
         }
-       
         } catch (Exception e) {
             return null;
         }
