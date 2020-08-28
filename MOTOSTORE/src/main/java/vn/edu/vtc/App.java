@@ -10,14 +10,13 @@ import vn.edu.vtc.persistance.Order;
 import vn.edu.vtc.persistance.Product;
 import vn.edu.vtc.persistance.User;
 import java.io.Console;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         ArrayList<String> mainMenu = new ArrayList<String>();
         mainMenu.add("1. Insert Product           ");
         mainMenu.add("2. Update Product           ");
@@ -33,7 +32,6 @@ public class App {
         menuInsert.add("0. Exit                     ");
 
         checkLogin();
-
         int choice = printMenu(mainMenu, 4);
         switch (choice) {
             case 1: {
@@ -72,7 +70,6 @@ public class App {
                 continue;
             }
         } while (choice < 0 || choice > limitChoice);
-
         return choice;
     }
 
@@ -113,7 +110,7 @@ public class App {
         return user;
     }
 
-    public static void insertProduct(int choice1) {
+    public static void insertProduct(int choice1) { 
         Product product = new Product();
         ProductBL productBL = new ProductBL();
 
@@ -239,14 +236,37 @@ public class App {
         if (orderBL.insertOrder(order)) {
             System.out.println("--------------------------------");
             System.out.println("  Insert completed");
-            System.out.println("Your order");
+            System.out.println("  Your order");
+
+            System.out.println("  "+ order.getShopName());
+            System.out.println("  Address: "+ order.getShopAddress());
+            System.out.println("  Hotline: "+ order.getHotline());
+            System.out.println("  Order ID: "+ order.getOrderID());
+
+            System.out.println("Customer");
+            System.out.println("Name: "+ customer.getCustomerName());
+            System.out.println("IDCard: "+ customer.getIdentityCard());
+            System.out.println("PhoneNumber: "+ customer.getPhoneNumber());
+            System.out.println("Address: "+customer.getCustomerAddress());
+
+            System.out.println("List products:");
+            System.out.println("|  ID   |                  Name                  |   Unit Cost    |   Quantity   |   Amount   |");
+            int i = 1;
+            long total = 0;
+            for (Product product : order.getProducts()) {
+                System.out.println("|   "+i+++"   |  "+ product.getProductName()+"  |"+ product.getPrice() +"|" + product.getQuantity()+"|"+ (product.getPrice() *product.getQuantity()) +"|");
+                total += product.getPrice() *product.getQuantity();
+            }
+            System.out.println("                                                   Total price:"+ total);
+            System.out.println("                                                  HA NOI, "+ java.time.LocalDate.now());
+            System.out.println("          Seller                                          Buyer");
+            System.out.println("         Lân béo     ");
 
         } else {
             System.out.println("--------------------------------");
             System.out.println("  Insert failed");
 
         }
-
     }
 
     public static Customer insertCustomerToOrder() {
@@ -271,7 +291,7 @@ public class App {
         System.out.print("  Name Product: ");
         String productName = scanner.nextLine();
         System.out.println("--------------------------------");
-        Product product = getByName(productName);
+        Product product = getProductByName(productName);
         if (product != null) {
 
             do {
@@ -291,7 +311,7 @@ public class App {
         return product;
     }
 
-    public static Product getByName(String productName) {
+    public static Product getProductByName(String productName) {
         Product product = new Product();
         ProductBL productBL = new ProductBL();
         product = productBL.getByName(productName);
@@ -319,7 +339,7 @@ public class App {
                 break;
             }
             case 2: {
-                insertProductToUpdateOrder(order.getOrderID());
+                updateProductInOrder(order.getOrderID());
                 break;
             }
         }
@@ -421,7 +441,7 @@ public class App {
         }
     }
 
-    public static void insertProductToUpdateOrder(int orderID) {
+    public static void updateProductInOrder(int orderID) {
         Order order = new Order();
         order.setOrderID(orderID);
         OrderDetailsBL orderDetailsBL = new OrderDetailsBL();
