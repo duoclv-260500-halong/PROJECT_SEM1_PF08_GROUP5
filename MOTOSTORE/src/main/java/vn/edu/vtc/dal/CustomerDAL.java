@@ -28,6 +28,7 @@ public class CustomerDAL {
         }
     }
 
+    
     public int updateCustomer(Customer customer, int customerID){
         try (Connection connection = DBUtil.getConnection();
         PreparedStatement pstm = connection.prepareStatement("Update customers set customerName = ? , customerAddress = ?, phoneNumber = ?, identityCard = ? where customerID = "+customerID);){
