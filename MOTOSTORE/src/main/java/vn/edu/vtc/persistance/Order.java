@@ -8,13 +8,15 @@ public class Order {
     private Date timeCreate;
     private String shopName;
     private String shopAddress;
+    private String hotline;
     private Customer customer;
     private ArrayList<Product> products;
 
-    public Order(){
+    public Order() {
         customer = null;
         products = new ArrayList<>();
     }
+
     public int getOrderID() {
         return orderID;
     }
@@ -46,7 +48,14 @@ public class Order {
     public void setShopAddress(String shopAddress) {
         this.shopAddress = shopAddress;
     }
+    
+    public String getHotline() {
+        return hotline;
+    }
 
+    public void setHotline(String hotline) {
+        this.hotline = hotline;
+    }
     public Customer getCustomer() {
         return customer;
     }
@@ -62,11 +71,13 @@ public class Order {
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
-    
-    public void addProduct(Product product){
-        if(products == null){
+
+    public void addProduct(Product product) {
+        if (products == null) {
             products = new ArrayList<>();
         }
         products.add(product);
     }
+
+    
 }
