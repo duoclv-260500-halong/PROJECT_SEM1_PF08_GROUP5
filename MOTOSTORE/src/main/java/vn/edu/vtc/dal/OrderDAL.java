@@ -100,6 +100,18 @@ public class OrderDAL {
                     return 0;
                 }
             }
+
+            //get store information
+            try (ResultSet rs = connection.createStatement().executeQuery("select * from Store;");
+            ){
+                if(rs.next()){
+                    order.setShopName(rs.getString("storeName"));
+                    order.setShopAddress(rs.getString("storeAddress"));
+                    order.setHotline(rs.getString("hotline"));
+                }                
+            } catch (Exception e) {
+                
+            }
             connection.commit();
             connection.setAutoCommit(true);
         } catch (Exception e) {
