@@ -21,6 +21,4 @@ public class UserBL {
         }
         return user;
     }
-
-
 }
