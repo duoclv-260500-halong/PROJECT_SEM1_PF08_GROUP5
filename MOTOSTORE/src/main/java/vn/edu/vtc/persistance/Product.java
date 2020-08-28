@@ -67,11 +67,7 @@ public class Product {
         this.categoryID = categoryID;
     }
 
-    @Override
-    public String toString() {
-
-        return super.toString();
-    }
+    
 
     public int getQuantity() {
         return quantity;
@@ -81,4 +77,9 @@ public class Product {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+
+        return super.toString();
+    }
 }
