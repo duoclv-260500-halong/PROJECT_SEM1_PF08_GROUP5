@@ -18,7 +18,6 @@ public class CustomerDAL {
                 customer.setCustomerName(rs.getString("customerName"));
                 customer.setCustomerAddress(rs.getString("customerAddress"));
                 customer.setPhoneNumber(rs.getString("phoneNumber"));
-                customer.setIdentityCard(rs.getString("identityCard"));
                 return customer;
             } else {
                 return null;
@@ -31,11 +30,10 @@ public class CustomerDAL {
     
     public int updateCustomer(Customer customer, int customerID){
         try (Connection connection = DBUtil.getConnection();
-        PreparedStatement pstm = connection.prepareStatement("Update customers set customerName = ? , customerAddress = ?, phoneNumber = ?, identityCard = ? where customerID = "+customerID);){
+        PreparedStatement pstm = connection.prepareStatement("Update customers set customerName = ? , customerAddress = ?, phoneNumber = ?where customerID = "+customerID);){
             pstm.setString(1, customer.getCustomerName());
             pstm.setString(2, customer.getCustomerAddress());
             pstm.setString(3, customer.getPhoneNumber());
-            pstm.setString(4, customer.getIdentityCard());
             return pstm.executeUpdate();
         } catch (Exception e) {
             return 0;
