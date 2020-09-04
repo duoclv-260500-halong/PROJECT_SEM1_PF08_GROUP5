@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import java.sql.Statement;
+import java.util.ArrayList;
+
 import vn.edu.vtc.persistance.Product;
 
 
@@ -26,28 +29,51 @@ public class ProductDAL {
         }
     }
 
-    public int updateProductDAL(Product product, String productName){
+    public int updateProductDAL(Product product, int productID){
         try (Connection con = DBUtil.getConnection();
-        PreparedStatement pstm = con.prepareStatement("Update Products set productName = ?, description = ?, price = ?, size = ?, color = ?, timeWarranty = ? where productName = ?" );){
+        PreparedStatement pstm = con.prepareStatement("Update Products set productName = ?, description = ?, price = ?, size = ?, color = ?, timeWarranty = ? where productID = ?" );){
             pstm.setString(1, product.getProductName());
             pstm.setString(2, product.getDescription());
-            pstm.setLong(3, product.getPrice());
+            pstm.setLong(3, product.getPrice());                    
             pstm.setString(4, product.getSize());
             pstm.setString(5, product.getColor());
             pstm.setString(6, product.getTimeWarranty());
-            pstm.setString(7, productName);
+            pstm.setInt(7, productID);
             return pstm.executeUpdate();    
         } catch (Exception e) {
             return 0;
         }
     }
-    public Product getProductByName(String productName){
+    public ArrayList<Product> getProductByCategory(int categoryID){
+        ArrayList<Product> listProducts = new ArrayList<>();
+        
+        try (Connection con = DBUtil.getConnection();
+        Statement stm = con.createStatement();) {
+        
+        ResultSet rs = stm.executeQuery("select * from Products where categoryID = " + categoryID);
+        while(rs.next()){
+            Product product = new Product();
+            product.setProductID(rs.getInt("productID"));
+            product.setProductName(rs.getString("productName"));
+            product.setPrice(rs.getLong("price"));
+            product.setSize(rs.getString("size"));
+            product.setColor(rs.getString("color"));
+            product.setCategoryID(rs.getInt("categoryID"));
+            product.setTimeWarranty(rs.getString("timeWarranty"));
+            listProducts.add(product);
+        }
+        } catch (Exception e) {
+        }
+        return listProducts;
+    }
+
+    public Product getProductByID(int productID){
         Product product = new Product();
         try (Connection con = DBUtil.getConnection();
-        PreparedStatement pstm = con.prepareStatement("select * from Products where productName = ?");) {
-        pstm.setString(1, productName);
-        ResultSet rs = pstm.executeQuery();
+        Statement stm = con.createStatement();) {
+        ResultSet rs = stm.executeQuery("select * from Products where productID = " + productID);
         if(rs.next()){
+            product.setProductID(rs.getInt("productID"));
             product.setProductName(rs.getString("productName"));
             product.setDescription(rs.getString("description"));
             product.setPrice(rs.getLong("price"));
@@ -55,11 +81,13 @@ public class ProductDAL {
             product.setColor(rs.getString("color"));
             product.setCategoryID(rs.getInt("categoryID"));
             product.setTimeWarranty(rs.getString("timeWarranty"));
-            return product;
+        }
+        else{
+            product = null;
         }
         } catch (Exception e) {
             return null;
         }
-        return null;
+        return product;
     }
 }
