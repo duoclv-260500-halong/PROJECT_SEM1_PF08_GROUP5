@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: vn.edu.vtc.AppTest
+Test set: vn.edu.vtc.InsertProductDALTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.127 s - in vn.edu.vtc.AppTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.803 s - in vn.edu.vtc.InsertProductDALTest
