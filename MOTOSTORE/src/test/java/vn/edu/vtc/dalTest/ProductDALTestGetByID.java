@@ -1,4 +1,4 @@
-package vn.edu.vtc;
+package vn.edu.vtc.dalTest;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
