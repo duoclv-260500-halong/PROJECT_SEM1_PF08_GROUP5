@@ -1,5 +1,4 @@
-package vn.edu.vtc;
-
+package vn.edu.vtc.blTest;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
