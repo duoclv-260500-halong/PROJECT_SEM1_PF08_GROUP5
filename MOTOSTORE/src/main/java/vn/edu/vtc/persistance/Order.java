@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class Order {
-    private int orderID;
+    private int orderID = -1;
     private Date timeCreate;
     private String shopName;
     private String shopAddress;
@@ -13,7 +13,7 @@ public class Order {
     private ArrayList<Product> products;
 
     public Order() {
-        customer = null;
+        customer = new Customer("Customer Name", "Customer Address", "0000000000");
         products = new ArrayList<>();
     }
 
