@@ -8,10 +8,11 @@ vn\edu\vtc\ProductBLTestUpdate.class
 vn\edu\vtc\OrderBLTestInsert.class
 vn\edu\vtc\ProductDALTestUpdate.class
 vn\edu\vtc\OrderDALTestGetByID.class
+vn\edu\vtc\ProductDALTestGetByID.class
+vn\edu\vtc\InsertProductDALTest.class
 vn\edu\vtc\AppTest.class
-vn\edu\vtc\ProductBLTestGetByName.class
 vn\edu\vtc\OrderBLTestGetByID.class
-vn\edu\vtc\ProductDALTestGetByName.class
+vn\edu\vtc\ProductBLTestGetByID.class
 vn\edu\vtc\OrderDALTestUpdateProducts.class
 vn\edu\vtc\ProductBLTestInsert.class
 vn\edu\vtc\Md5Test.class
