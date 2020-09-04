@@ -1,6 +1,7 @@
 package vn.edu.vtc.persistance;
 
 public class Product {
+    private int productID;
     private String productName;
     private String description;
     private long price;
@@ -9,7 +10,15 @@ public class Product {
     private String timeWarranty;
     private int categoryID;
     private int quantity;
-    
+
+    public int getProductID() {
+        return productID;
+    }
+
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
     public String getProductName() {
         return productName;
     }
@@ -57,8 +66,7 @@ public class Product {
     public void setTimeWarranty(String timeWarranty) {
         this.timeWarranty = timeWarranty;
     }
-    
-    
+
     public int getCategoryID() {
         return categoryID;
     }
@@ -66,8 +74,6 @@ public class Product {
     public void setCategoryID(int categoryID) {
         this.categoryID = categoryID;
     }
-
-    
 
     public int getQuantity() {
         return quantity;
@@ -82,4 +88,5 @@ public class Product {
 
         return super.toString();
     }
+
 }
