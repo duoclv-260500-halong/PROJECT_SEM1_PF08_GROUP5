@@ -5,9 +5,16 @@ public class Customer {
     private String customerName;
     private String customerAddress;
     private String phoneNumber;
-    private String identityCard;
 
-    public int getCustomerID() {
+    public Customer(String customerName, String customerAddress, String phoneNumber){
+        this.customerName=customerName;
+        this.customerAddress=customerAddress;
+        this.phoneNumber=phoneNumber;
+    }
+    public Customer() {
+        
+	}
+	public int getCustomerID() {
         return customerID;
     }
 
@@ -38,13 +45,11 @@ public class Customer {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    public String getIdentityCard() {
-        return identityCard;
+    @Override
+    public String toString() {
+        
+        return "Name Customer: " + customerName + "\nAddress Customer: " + customerAddress + "\nPhone Number: " + phoneNumber;
     }
-
-    public void setIdentityCard(String identityCard) {
-        this.identityCard = identityCard;
-    }
+    
     
 }
