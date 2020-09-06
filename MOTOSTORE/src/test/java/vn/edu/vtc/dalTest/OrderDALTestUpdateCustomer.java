@@ -23,7 +23,6 @@ public class OrderDALTestUpdateCustomer {
             int expected = 1;
             assertTrue(result == expected);
         } catch (Exception e) {
-            //TODO: handle exception
         }
     }
     @Test
@@ -40,7 +39,6 @@ public class OrderDALTestUpdateCustomer {
             int expected = 0;
             assertTrue(result == expected);
         } catch (Exception e) {
-            //TODO: handle exception
         }
     }
     @Test
@@ -57,7 +55,6 @@ public class OrderDALTestUpdateCustomer {
             int expected = 0;
             assertTrue(result == expected);
         } catch (Exception e) {
-            //TODO: handle exception
         }
     }
     @Test
@@ -74,7 +71,6 @@ public class OrderDALTestUpdateCustomer {
             int expected = 0;
             assertTrue(result == expected);
         } catch (Exception e) {
-            //TODO: handle exception
         }
     }
 
