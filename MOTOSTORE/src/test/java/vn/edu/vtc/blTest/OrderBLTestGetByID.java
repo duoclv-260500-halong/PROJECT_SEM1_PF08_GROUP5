@@ -21,7 +21,6 @@ public class OrderBLTestGetByID {
             assertTrue(result.getOrderID() == expected.getOrderID());
             assertTrue(result.getCustomer().getCustomerID() == expected.getCustomer().getCustomerID());
         } catch (Exception e) {
-            //TODO: handle exception
         }
     }
 
@@ -34,7 +33,6 @@ public class OrderBLTestGetByID {
             assertTrue(result.getOrderID() == expected.getOrderID());
             assertTrue(result.getCustomer().getCustomerID() == expected.getCustomer().getCustomerID());          
         } catch (Exception e) {
-            //TODO: handle exception
         }
     }
 }
