@@ -130,7 +130,6 @@ public class App {
             }
 
         } catch (Exception e) {
-            // TODO: handle exception
         }
         return user;
     }
@@ -582,7 +581,7 @@ public class App {
         System.out.println(
                 "----------------------------------------------------------------------------------------------------");
         System.out.println(
-                "|  STT  |                     Name                     |   Unit Cost    |   Quantity   |   Amount   |");
+                "|  STT  |                     Name                     |     Price      |   Quantity   |   Amount   |");
         System.out.println(
                 "----------------------------------------------------------------------------------------------------");
         int i = 1;
@@ -749,6 +748,10 @@ public class App {
     public static void updateProductInOrder(int orderID) {
         Order order = new Order();
         order.setOrderID(orderID);
+        order.setOrderStatus(2);
+        System.out.print("Reason to update: ");
+        String reasonUpdate = scanner.nextLine();
+        OrderBL orderBL = new OrderBL();
         OrderDetailsBL orderDetailsBL = new OrderDetailsBL();
         ArrayList<Product> products = new ArrayList<>();
         while (true) {
@@ -796,7 +799,7 @@ public class App {
         System.out.print("  Are you already update this order (Yes/No): ");
         String confirm = scanner.nextLine();
         if (confirm.equalsIgnoreCase("yes")) {
-            if (orderDetailsBL.updateOrderDetails(order, order.getOrderID())) {
+            if (orderDetailsBL.updateOrderDetails(order, order.getOrderID()) && orderBL.updateOrder(order.getOrderID(), order.getOrderStatus(), reasonUpdate)) {
                 System.out.println(" Update completed");
                 showOrder(order);
             } else {
