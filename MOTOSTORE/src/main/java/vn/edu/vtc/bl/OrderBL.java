@@ -14,5 +14,7 @@ public class OrderBL {
         
         return orderDAL.insertOrder(order) > 0;
     }
-    
+    public boolean updateOrder(int orderID, int orderStatus, String reasonUpdate){
+        return orderDAL.updateOrder(orderID, orderStatus, reasonUpdate) > 0;
+    }
 }
