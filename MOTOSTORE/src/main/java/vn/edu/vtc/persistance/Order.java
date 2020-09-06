@@ -9,6 +9,7 @@ public class Order {
     private String shopName;
     private String shopAddress;
     private String hotline;
+    private int orderStatus = 1;
     private Customer customer;
     private ArrayList<Product> products;
 
@@ -33,6 +34,14 @@ public class Order {
         this.timeCreate = timeCreate;
     }
 
+    public int getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
     public String getShopName() {
         return shopName;
     }
@@ -48,7 +57,7 @@ public class Order {
     public void setShopAddress(String shopAddress) {
         this.shopAddress = shopAddress;
     }
-    
+
     public String getHotline() {
         return hotline;
     }
@@ -56,6 +65,7 @@ public class Order {
     public void setHotline(String hotline) {
         this.hotline = hotline;
     }
+
     public Customer getCustomer() {
         return customer;
     }
@@ -79,5 +89,4 @@ public class Order {
         products.add(product);
     }
 
-    
 }
