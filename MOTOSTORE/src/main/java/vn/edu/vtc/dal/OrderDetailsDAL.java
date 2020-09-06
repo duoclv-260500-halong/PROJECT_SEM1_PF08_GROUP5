@@ -25,7 +25,7 @@ public class OrderDetailsDAL {
             }
             //insert OrderDetails
             for (Product product : order.getProducts()) {
-                try (PreparedStatement pstm = connection.prepareStatement("insert into OrderDetails(orderID, productID, unitPrice, quantity) values (?,?,?,?)");){
+                try (PreparedStatement pstm = connection.prepareStatement("insert into OrderDetails(orderID, productID, price, quantity) values (?,?,?,?)");){
                     pstm.setInt(1, order.getOrderID());
                     pstm.setInt(2, product.getProductID());
                     pstm.setLong(3, product.getPrice());
