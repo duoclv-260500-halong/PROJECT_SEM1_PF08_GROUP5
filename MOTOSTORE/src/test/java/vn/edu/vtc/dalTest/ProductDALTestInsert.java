@@ -24,7 +24,7 @@ public class ProductDALTestInsert {
             int expected = 1;
             assertTrue(result == expected);
         } catch (Exception e) {
-            // TODO: handle exception
+            
         }
 
     }
@@ -45,7 +45,7 @@ public class ProductDALTestInsert {
             int expected = 0;
             assertTrue(result == expected);
         } catch (Exception e) {
-            // TODO: handle exception
+            
         }
 
     }
@@ -66,7 +66,6 @@ public class ProductDALTestInsert {
             int expected = 0;
             assertTrue(result == expected);
         } catch (Exception e) {
-            // TODO: handle exception
         }
 
     }
@@ -87,7 +86,6 @@ public class ProductDALTestInsert {
             int expected = 0;
             assertTrue(result == expected);
         } catch (Exception e) {
-            // TODO: handle exception
         }
 
     }
@@ -107,7 +105,6 @@ public class ProductDALTestInsert {
             int expected = 0;
             assertTrue(result == expected);
         } catch (Exception e) {
-            // TODO: handle exception
         }
 
     }
@@ -127,7 +124,6 @@ public class ProductDALTestInsert {
             int expected = 0;
             assertTrue(result == expected);
         } catch (Exception e) {
-            // TODO: handle exception
         }
 
     }
@@ -147,7 +143,6 @@ public class ProductDALTestInsert {
             int expected = 0;
             assertTrue(result == expected);
         } catch (Exception e) {
-            // TODO: handle exception
         }
 
     }
