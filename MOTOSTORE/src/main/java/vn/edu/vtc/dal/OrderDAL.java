@@ -56,7 +56,7 @@ public class OrderDAL {
                 } catch (Exception e) {
                     return null;
                 }
-                product.setPrice(rs.getLong("unitPrice"));
+                product.setPrice(rs.getLong("price"));
                 product.setQuantity(rs.getInt("quantity"));
                 products.add(product);
             }
@@ -104,8 +104,9 @@ public class OrderDAL {
             }
 
             // insert Order
-            try (PreparedStatement pstm = connection.prepareStatement("insert into Orders(customerID) values (?)");) {
+            try (PreparedStatement pstm = connection.prepareStatement("insert into Orders(customerID, orderStatus) values (?, ?)");) {
                 pstm.setInt(1, order.getCustomer().getCustomerID());
+                pstm.setInt(2, order.getOrderStatus());
                 if (pstm.executeUpdate() <= 0) {
                     throw new SQLException();
                 }
@@ -114,7 +115,7 @@ public class OrderDAL {
                 return 0;
             }
 
-            // get orderID
+            // get orderID, timeCreate
             try (ResultSet rs = connection.createStatement()
                     .executeQuery("select orderID from Orders order by orderID desc limit 1");) {
                 if (rs.next()) {
@@ -130,7 +131,7 @@ public class OrderDAL {
             // insert OrderDetails
             for (Product product : order.getProducts()) {
                 try (PreparedStatement pstm = connection.prepareStatement(
-                        "insert into OrderDetails(orderID, productID, unitPrice, quantity) values (?,?,?,?)");) {
+                        "insert into OrderDetails(orderID, productID, price, quantity) values (?,?,?,?)");) {
                     pstm.setInt(1, order.getOrderID());
                     pstm.setInt(2, product.getProductID());
                     pstm.setLong(3, product.getPrice());
@@ -152,7 +153,6 @@ public class OrderDAL {
                     order.setHotline(rs.getString("hotline"));
                 }
             } catch (Exception e) {
-
             }
             connection.commit();
             connection.setAutoCommit(true);
@@ -162,4 +162,19 @@ public class OrderDAL {
         return 1;
     }
 
+    public int updateOrder(int orderID, int orderStatus, String reasonUpdate){
+
+        try (Connection con = DBUtil.getConnection();
+            PreparedStatement pstm = con.prepareStatement("update orders set reasonUpdate = ?, orderStatus = ? where orderID = ?")){
+            pstm.setString(1, reasonUpdate);
+            pstm.setInt(2, orderStatus);
+            pstm.setInt(3, orderID);
+            if(pstm.executeUpdate() <= 0){
+                return 0;
+            }
+        } catch (Exception e) {
+            return 0;
+        }
+        return 1;
+    }
 }
