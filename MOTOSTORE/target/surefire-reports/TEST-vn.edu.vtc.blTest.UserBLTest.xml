@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="vn.edu.vtc.UserDALTest" time="0.011" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="vn.edu.vtc.blTest.UserBLTest" time="1.065" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="13"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-13.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\ADMINI~1\AppData\Local\Temp\surefire13825878200877110388\surefirebooter13152070202743444221.jar C:\Users\Administrator\AppData\Local\Temp\surefire13825878200877110388 2020-09-05T02-10-32_443-jvmRun1 surefire3159430777659840067tmp surefire_017721553270364801011tmp"/>
+    <property name="sun.java.command" value="C:\Users\ADMINI~1\AppData\Local\Temp\surefire750249300936544618\surefirebooter10242641136869870883.jar C:\Users\Administrator\AppData\Local\Temp\surefire750249300936544618 2020-09-07T03-55-30_027-jvmRun1 surefire2363704833104406884tmp surefire_02054669737445524494tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Administrator\Desktop\PROJECT_SEM1_PF08_GROUP5\MOTOSTORE\target\test-classes;C:\Users\Administrator\Desktop\PROJECT_SEM1_PF08_GROUP5\MOTOSTORE\target\classes;C:\Users\Administrator\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\Administrator\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\8.0.20\mysql-connector-java-8.0.20.jar;C:\Users\Administrator\.m2\repository\com\google\protobuf\protobuf-java\3.6.1\protobuf-java-3.6.1.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\ADMINI~1\AppData\Local\Temp\surefire13825878200877110388\surefirebooter13152070202743444221.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\ADMINI~1\AppData\Local\Temp\surefire750249300936544618\surefirebooter10242641136869870883.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="13.0.1+9"/>
@@ -55,10 +55,6 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="57.0"/>
   </properties>
-  <testcase name="testLogin1" classname="vn.edu.vtc.UserDALTest" time="0"/>
-  <testcase name="testLogin2" classname="vn.edu.vtc.UserDALTest" time="0"/>
-  <testcase name="testLogin3" classname="vn.edu.vtc.UserDALTest" time="0"/>
-  <testcase name="testLogin4" classname="vn.edu.vtc.UserDALTest" time="0"/>
-  <testcase name="testLogin5" classname="vn.edu.vtc.UserDALTest" time="0"/>
-  <testcase name="testLogin6" classname="vn.edu.vtc.UserDALTest" time="0"/>
+  <testcase name="testUserBL1" classname="vn.edu.vtc.blTest.UserBLTest" time="1.008"/>
+  <testcase name="testUserBL2" classname="vn.edu.vtc.blTest.UserBLTest" time="0.048"/>
 </testsuite>
