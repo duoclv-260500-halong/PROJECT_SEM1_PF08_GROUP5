@@ -47,7 +47,12 @@ public class App {
         menuInsertProductToOrder.add("3. Clothes                  ");
         menuInsertProductToOrder.add("4. Gloves                   ");
         menuInsertProductToOrder.add("0. Exit                     ");
-        checkLogin();
+        try {
+            checkLogin();
+        } catch (Exception e) {
+            System.exit(0);
+        }
+        
         while (true) {
             int choice = printMenu(mainMenu, 4);
             switch (choice) {
