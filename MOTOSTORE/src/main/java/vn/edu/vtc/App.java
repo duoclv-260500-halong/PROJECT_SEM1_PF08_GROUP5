@@ -145,11 +145,9 @@ public class App {
                 }
                 user = userBL.getUser(username, password);
                 if (user != null) {
-                    clrscr();
                     System.out.println("Login successfully\n");
                     break;
                 } else {
-                    clrscr();
                     System.out.println("Username or Password not correct\n");
                 }
             }
@@ -257,10 +255,8 @@ public class App {
             System.out.print("Do you want to insert another products? (Yes/No): ");
             String confirm1 = scanner.nextLine();
             if (confirm1.equalsIgnoreCase("no")) {
-                clrscr();
                 break;
             }
-            clrscr();
         } while (true);
     }
 
@@ -367,12 +363,10 @@ public class App {
             System.out.print("Do you want to update another product? (Yes/No): ");
             String confirm = scanner.nextLine();
             if (confirm.equalsIgnoreCase("no")) {
-                clrscr();
                 break;
             }
 
         }
-        clrscr();
     }
 
     public static Product showProduct(Product product) {
@@ -530,7 +524,6 @@ public class App {
             String confirm = scanner.nextLine();
             if (confirm.equalsIgnoreCase("no")) {
                 order.setProducts(products);
-                clrscr();
                 break;
             }
         }
@@ -541,7 +534,6 @@ public class App {
             order.setOrderStatus(1);
             OrderBL orderBL = new OrderBL();
             if (orderBL.insertOrder(order)) {
-                clrscr();
                 System.out.println("Create successfully");
                 System.out.println("Your order");
                 System.out.println(
@@ -884,16 +876,13 @@ public class App {
             order.setProducts(productsToUpdate);
             if (orderDetailsBL.updateOrderDetails(order, order.getOrderID())
                     && orderBL.updateOrder(order.getOrderID(), order.getOrderStatus(), reasonUpdate)) {
-                clrscr();
                 System.out.println(" Update completed");
                 order.setProducts(productsToPrint);
                 showOrder(order);
             } else {
-                clrscr();
                 System.out.println(" Update failed");
             }
         } else {
-            clrscr();
             System.out.println("Canceled update order");
         }
     }
