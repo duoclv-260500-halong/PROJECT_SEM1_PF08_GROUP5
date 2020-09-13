@@ -13,7 +13,6 @@ public class UserDAL {
         try (Connection connection = DBUtil.getConnection();
         PreparedStatement pstm = connection
                 .prepareStatement("select * from user where username = ? and pass = ?");){
-            
             pstm.setString(1, username);
             pstm.setString(2, password);
             ResultSet rs = pstm.executeQuery();
@@ -27,7 +26,7 @@ public class UserDAL {
             }
             
         } catch (Exception e) {
-            e.printStackTrace();
+            user=null;
         }
         return user;
     }
