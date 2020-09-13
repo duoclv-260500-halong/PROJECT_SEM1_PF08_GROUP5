@@ -20,8 +20,10 @@ public class OrderDAL {
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
                 order.setOrderID(rs.getInt("orderID"));
+                order.setTimeCreate(rs.getTimestamp("timeCreate"));
+                order.setOrderStatus(rs.getInt("orderStatus"));
                 customer.setCustomerID(rs.getInt("customerID"));
-
+                
             }
         } catch (Exception e) {
             return null;
@@ -45,6 +47,8 @@ public class OrderDAL {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 Product product = new Product();
+                product.setQuantity(rs.getInt("quantity"));
+                if(product.getQuantity()>0){
                 product.setProductID(rs.getInt("productID"));
                 try (PreparedStatement pstm1 = con.prepareStatement(
                         "select productName from products where productID = " + product.getProductID());) {
@@ -53,12 +57,15 @@ public class OrderDAL {
                         product.setProductName(rs1.getString("productName"));
 
                     }
+                
                 } catch (Exception e) {
                     return null;
                 }
                 product.setPrice(rs.getLong("price"));
-                product.setQuantity(rs.getInt("quantity"));
+                
                 products.add(product);
+            }
+                
             }
         } catch (Exception e) {
             return null;
@@ -115,15 +122,18 @@ public class OrderDAL {
                 return 0;
             }
 
-            // get orderID, timeCreate
+            // get orderID, timeCreate, orderStatus
             try (ResultSet rs = connection.createStatement()
-                    .executeQuery("select orderID from Orders order by orderID desc limit 1");) {
+                    .executeQuery("select * from Orders order by orderID desc limit 1");) {
                 if (rs.next()) {
                     order.setOrderID(rs.getInt("orderID"));
+                    order.setTimeCreate(rs.getTimestamp("timeCreate"));
+                    order.setOrderStatus(rs.getInt("orderStatus"));
                 } else {
                     throw new SQLException();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
+                e.printStackTrace();
                 connection.rollback();
                 return 0;
             }
