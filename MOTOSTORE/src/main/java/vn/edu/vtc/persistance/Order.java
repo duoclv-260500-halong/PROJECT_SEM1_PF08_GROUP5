@@ -1,15 +1,16 @@
 package vn.edu.vtc.persistance;
 
-import java.sql.Date;
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Order {
     private int orderID = -1;
-    private Date timeCreate;
+    private Timestamp timeCreate;
     private String shopName;
     private String shopAddress;
     private String hotline;
-    private int orderStatus = 1;
+    private int orderStatus = 0;
     private Customer customer;
     private ArrayList<Product> products;
 
@@ -26,11 +27,11 @@ public class Order {
         this.orderID = orderID;
     }
 
-    public Date getTimeCreate() {
+    public Timestamp getTimeCreate() {
         return timeCreate;
     }
 
-    public void setTimeCreate(Date timeCreate) {
+    public void setTimeCreate(Timestamp timeCreate) {
         this.timeCreate = timeCreate;
     }
 
