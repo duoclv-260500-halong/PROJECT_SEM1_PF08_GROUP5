@@ -16,7 +16,7 @@ public class ProductBL {
     public ArrayList<Product> getByCategory(int categoryID){
         return productDAL.getProductByCategory(categoryID);
     } 
-    public Product getProductByID(int productID){
+    public Product getProductByID(int productID){   
         return productDAL.getProductByID(productID);
     }   
 }
