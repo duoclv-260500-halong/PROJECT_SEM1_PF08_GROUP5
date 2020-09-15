@@ -472,6 +472,90 @@ public class App {
         }
     }
 
+    public static int printListOrder(ArrayList<Order> listOrder, int sizeListOrder) {
+        int orderID;
+        int maxPage = (int) Math.ceil(((double) sizeListOrder + 1) / 10);
+        for (int i = 1;; i++) {
+            System.out.println(
+                    "--------------------------------------");
+            System.out.println(
+                    "| ID Order |      Name Customer      |");
+            System.out.println(
+                    "------------------------------------- ");
+            for (int j = i * 10 - 9; j <= i * 10; j++) {
+
+                try {
+                    System.out.format("|%10d|%25s|\n", listOrder.get(j - 1).getOrderID(), listOrder.get(j-1).getCustomer().getCustomerName());
+                } catch (Exception e) {
+                    break;
+                }
+            }
+            System.out.println(
+                "------------------------------------- ");
+            System.out.println("Page: " + i + "/" + maxPage);
+            System.out.println("1. Previous page");
+            System.out.println("2. Next page");
+            System.out.println("3. Choose order");
+            System.out.println("4. Select page");
+            System.out.println("0. Exit");
+            System.out.print("Choice: ");
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1": {
+                    if (i == 1) {
+                        i--;
+                        break;
+                    } else {
+                        i -= 2;
+                        break;
+                    }
+                }
+                case "2": {
+                    if (i >= (int) Math.ceil(((double) sizeListOrder + 1) / 10)) {
+                        i--;
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+                case "3": {
+                    while (true) {
+                        try {
+                            System.out.print("Choice orderID: ");
+                            orderID = Integer.valueOf(scanner.nextLine());
+                            return orderID;
+                        } catch (Exception e) {
+                            System.out.println("Please input number");
+                        }
+                    }
+                }
+                case "4": {
+                    try {
+                        System.out.print("Number of page: ");
+                        int pageNumber = Integer.valueOf(scanner.nextLine());
+                        if (pageNumber < 1 || pageNumber > maxPage) {
+                            System.out.println("Not have page " + pageNumber);
+                            i--;
+                            break;
+                        } else {
+                            i = pageNumber - 1;
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Please input number");
+                    }
+                }
+                case "0": {
+                    return -1;
+                }
+                default: {
+                    System.out.println("Please choose 0-4");
+                    i--;
+                    break;
+                }
+            }
+        }
+    }
     public static Product getProductByID(int productID) {
         ProductBL productBL = new ProductBL();
         Product product = productBL.getProductByID(productID);
@@ -654,9 +738,24 @@ public class App {
                 "-----------------------------------------------------------------------------------------------------------");
     }
 
+    public static ArrayList<Order> getAllOrder(){
+        ArrayList<Order> listOrder = new ArrayList<>();
+        OrderBL orderBL = new OrderBL();
+        listOrder = orderBL.getAllOrder();
+        return listOrder;
+    }
     public static void updateOrder() {
-        Order order = getOrderByID();
-        Date date = new Date();
+        ArrayList<Order> listOrder = new ArrayList<>();
+        listOrder = getAllOrder();
+        if(listOrder.size()>0){
+        while(true){
+            int choice = printListOrder(listOrder, listOrder.size());
+            if(choice==-1){
+                break;
+            }
+            
+            Order order = getOrderByID(choice);
+            Date date = new Date();
         if (order != null) {
             showOrder(order);
             if (order.getTimeCreate().getDate() == date.getDate() && order.getTimeCreate().getMonth() == date.getMonth()
@@ -670,8 +769,8 @@ public class App {
                     System.out.println("| 2. List Products             |");
                     System.out.println("--------------------------------");
                     System.out.print("Update?(1/2): ");
-                    int choice = Integer.valueOf(scanner.nextLine());
-                    switch (choice) {
+                    int choice1 = Integer.valueOf(scanner.nextLine());
+                    switch (choice1) {
                         case 1: {
                             updateCustomer();
                             break;
@@ -683,36 +782,38 @@ public class App {
                     }
                 }
             } else {
-                System.out.println("This order is not created today, can't update");
+                System.out.println("This order is not created today, can't update!");
+                System.out.print("Do you want to update order continue? (Yes/No): ");
+                String confirm = scanner.nextLine();
+                if(confirm.equalsIgnoreCase("yes")){
+                    continue;
+                }
+                else{
+                    break;
+                }
             }
+        }
+        }}
+        else{
+            System.out.println("The store has no invoices!");
         }
     }
 
-    public static Order getOrderByID() {
+    public static Order getOrderByID(int orderID) {
         Order order = new Order();
         OrderBL orderBL = new OrderBL();
         do {
             try {
-                System.out.println("--------------------------------");
-                System.out.println("|---------Update Order---------|");
-                System.out.print("Input orderID: ");
-                int orderID = Integer.valueOf(scanner.nextLine());
+                
                 order = orderBL.getByID(orderID);
                 if (order.getOrderID() == orderID) {
                     break;
                 } else {
-                    System.out.print("Order not found!\n Do you want to continue?(Yes/No): ");
-                    String confirm = scanner.nextLine();
-                    if (confirm.equalsIgnoreCase("NO")) {
-                        return null;
-                    }
+                    System.out.print("Order not found!\n");
+                    
                 }
             } catch (Exception e) {
-                System.out.print("Order not found!\nDo you want to continue?(Yes/No): ");
-                String confirm = scanner.nextLine();
-                if (confirm.equalsIgnoreCase("NO")) {
-                    return null;
-                }
+                System.out.print("Order not found!\n");
             }
         } while (true);
         return order;
@@ -734,7 +835,9 @@ public class App {
                         System.out.println("CustomerID must > 0");
                     }
                     customer = customerBL.getCustomer(customerID);
+                    System.out.println("--------------------------------");
                     System.out.println(customer);
+                    System.out.println("--------------------------------");
                     break;
                 } catch (Exception e) {
                     System.out.println("CustomerID must > 0");
@@ -768,7 +871,7 @@ public class App {
                     }
                     System.out.println("--------------------------------");
                     System.out.println(customer);
-                    System.out.print("Are you already update customer? (Yes/No)");
+                    System.out.print("Are you already update customer? (Yes/No): ");
                     String confirm = scanner.nextLine();
                     if (confirm.equalsIgnoreCase("yes")) {
                         if (customerBL.updateCustomer(customer, customerID)) {
@@ -782,6 +885,7 @@ public class App {
                             if (confirm1.equalsIgnoreCase("no")) {
                                 break;
                             }
+                            
                         }
                     } else {
                         System.out.println("Canceled customer update!");
