@@ -14,10 +14,8 @@ public class DBUtil {
         try {
             connection = DriverManager.getConnection(url, user, password);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Can't connect to SQLserver");
         }
-        
         return connection;
     }
-
 }
