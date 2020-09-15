@@ -83,10 +83,5 @@ public class Product {
         this.quantity = quantity;
     }
 
-    @Override
-    public String toString() {
-
-        return super.toString();
-    }
 
 }
