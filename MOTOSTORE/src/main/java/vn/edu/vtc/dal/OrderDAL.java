@@ -75,6 +75,34 @@ public class OrderDAL {
         return order;
     }
 
+    public ArrayList<Order> getAllOrder(){
+        ArrayList<Order> listOrder = new ArrayList<>();
+        try (Connection con = DBUtil.getConnection();
+        PreparedStatement pstm = con.prepareStatement("select * from Orders");){
+        ResultSet rs = pstm.executeQuery();
+        while(rs.next()){
+            Order order = new Order();
+            order.setOrderID(rs.getInt("orderID"));
+            order.getCustomer().setCustomerID(rs.getInt("customerID"));
+            try (PreparedStatement pstm1 = con.prepareStatement("select customerName from Customers where customerID = ?")){
+                pstm1.setInt(1, order.getCustomer().getCustomerID());
+                ResultSet rs1 = pstm1.executeQuery();
+                if(rs1.next()){
+                    order.getCustomer().setCustomerName(rs1.getString("customerName"));
+                }
+                else{
+                    return null;
+                }
+            } catch (Exception e) {
+                return null;
+            }
+            listOrder.add(order);
+        }
+        } catch (Exception e) {
+            return null;
+        }
+        return listOrder;
+    }
     public int insertOrder(Order order) {
         if (order.getProducts() == null || order.getProducts().isEmpty()) {
             return 0;
