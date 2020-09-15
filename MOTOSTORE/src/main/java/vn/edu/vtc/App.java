@@ -128,7 +128,6 @@ public class App {
             while (true) {
                 System.out.println("--------------------------------");
                 System.out.println("|------------LOGIN-------------|");
-
                 System.out.print("Input username: ");
                 String username = scanner.nextLine();
                 if (username.equals("")) {
@@ -388,15 +387,15 @@ public class App {
         int maxPage = (int) Math.ceil(((double) sizeListProduct + 1) / 10);
         for (int i = 1;; i++) {
             System.out.println(
-                    "---------------------------------------------------------------------------------------------------------------------------------");
+                    "----------------------------------------------------------------------------------------------------------------------------");
             System.out.println(
-                    "|  ID   |                     Name                     |     Price      |       Size       |      Color     |   Time Warranty   |");
+                    "|  ID   |                   Name                   |       Price       |      Size      |      Color     |  Time Warranty  |");
             System.out.println(
-                    "---------------------------------------------------------------------------------------------------------------------------------");
+                    "----------------------------------------------------------------------------------------------------------------------------");
             for (int j = i * 10 - 9; j <= i * 10; j++) {
 
                 try {
-                    System.out.format("|%7d|%46s|%16d|%18s|%16s|%19s|\n", listProducts.get(j - 1).getProductID(),
+                    System.out.format("|%6d |%41s |%14d VND |%15s |%15s |%16s |\n", listProducts.get(j - 1).getProductID(),
                             listProducts.get(j - 1).getProductName(), listProducts.get(j - 1).getPrice(),
                             listProducts.get(j - 1).getSize(), listProducts.get(j - 1).getColor(),
                             listProducts.get(j - 1).getTimeWarranty());
@@ -406,7 +405,7 @@ public class App {
                 }
             }
             System.out.println(
-                    "---------------------------------------------------------------------------------------------------------------------------------");
+                    "----------------------------------------------------------------------------------------------------------------------------");
             System.out.println("Page: " + i + "/" + maxPage);
             System.out.println("1. Previous page");
             System.out.println("2. Next page");
@@ -724,15 +723,15 @@ public class App {
                 "-----------------------------------------------------------------------------------------------------------");
         long total = 0;
         for (Product product : order.getProducts()) {
-            System.out.format("|%7d|%45s |%15d VND|%13d |%11d VND|\n", product.getProductID(), product.getProductName(),
+            System.out.format("|%7d|%45s |%14d VND |%13d |%10d VND |\n", product.getProductID(), product.getProductName(),
                     product.getPrice(), product.getQuantity(), product.getPrice() * product.getQuantity());
             total += product.getPrice() * product.getQuantity();
         }
         System.out.println(
                 "-----------------------------------------------------------------------------------------------------------");
         System.out
-                .println("                                                                                Total price: "
-                        + total + " VND");
+                .format("|                                                                            Total price: %11d VND |\n"
+                        ,total);
 
         System.out.println(
                 "-----------------------------------------------------------------------------------------------------------");
@@ -916,13 +915,14 @@ public class App {
         Order order = new Order();
         order.setOrderID(orderID);
         ArrayList<Product> productsToUpdate = listProductsInOrder;
-        ArrayList<Product> productsToPrint = new ArrayList<>();
+        
         System.out.print("Reason to update: ");
         String reasonUpdate = scanner.nextLine();
         OrderBL orderBL = new OrderBL();
         OrderDetailsBL orderDetailsBL = new OrderDetailsBL();
-
+        ArrayList<Product> productsToPrint = new ArrayList<>();
         while (true) {
+            productsToPrint = new ArrayList<>();
             int choice = printMenu(menuAddProductToUpdateOrder, 1);
             if (choice == 1) {
                 System.out.print("Input productID: ");
@@ -950,14 +950,9 @@ public class App {
                         }
 
                     }
-
-                    for (Product product : productsToUpdate) {
-                        if (product.getQuantity() > 0) {
-                            productsToPrint.add(product);
-                        }
-                    }
+        
                     if (count == 1) {
-                        order.setProducts(productsToPrint);
+                        order.setProducts(productsToUpdate);
                         showOrder(order);
                         continue;
                     }
@@ -966,12 +961,19 @@ public class App {
                     System.out.print("ProductID must > 0 ");
                     continue;
                 }
-
+                
             } else if (choice == 0) {
+                for (Product product : productsToUpdate) {
+                    if (product.getQuantity() > 0) {
+                        productsToPrint.add(product);
+                    }
+                }
                 order.setProducts(productsToPrint);
                 break;
             }
+            
         }
+        
         showOrder(order);
         System.out.print("  Are you already update this order (Yes/No): ");
         String confirm = scanner.nextLine();
