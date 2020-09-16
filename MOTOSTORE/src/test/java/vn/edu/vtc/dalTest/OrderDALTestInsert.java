@@ -35,7 +35,7 @@ public class OrderDALTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderDAL orderDAL = new OrderDAL();
-            int result = orderDAL.insertOrder(order);
+            int result = orderDAL.createOrder(order);
             int expected = 1;
             assertTrue(result == expected);
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class OrderDALTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderDAL orderDAL = new OrderDAL();
-            int result = orderDAL.insertOrder(order);
+            int result = orderDAL.createOrder(order);
             int expected = 0;
             assertTrue(result == expected);
 
@@ -96,7 +96,7 @@ public class OrderDALTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderDAL orderDAL = new OrderDAL();
-            int result = orderDAL.insertOrder(order);
+            int result = orderDAL.createOrder(order);
             int expected = 0;
             assertTrue(result == expected);
 
@@ -127,7 +127,7 @@ public class OrderDALTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderDAL orderDAL = new OrderDAL();
-            int result = orderDAL.insertOrder(order);
+            int result = orderDAL.createOrder(order);
             int expected = 0;
             assertTrue(result == expected);
 
@@ -158,7 +158,7 @@ public class OrderDALTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderDAL orderDAL = new OrderDAL();
-            int result = orderDAL.insertOrder(order);
+            int result = orderDAL.createOrder(order);
             int expected = 0;
             assertTrue(result == expected);
 
@@ -189,7 +189,7 @@ public class OrderDALTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderDAL orderDAL = new OrderDAL();
-            int result = orderDAL.insertOrder(order);
+            int result = orderDAL.createOrder(order);
             int expected = 0;
             assertTrue(result == expected);
 
@@ -220,7 +220,7 @@ public class OrderDALTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderDAL orderDAL = new OrderDAL();
-            int result = orderDAL.insertOrder(order);
+            int result = orderDAL.createOrder(order);
             int expected = 0;
             assertTrue(result == expected);
 
@@ -251,7 +251,7 @@ public class OrderDALTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderDAL orderDAL = new OrderDAL();
-            int result = orderDAL.insertOrder(order);
+            int result = orderDAL.createOrder(order);
             int expected = 0;
             assertTrue(result == expected);
 
