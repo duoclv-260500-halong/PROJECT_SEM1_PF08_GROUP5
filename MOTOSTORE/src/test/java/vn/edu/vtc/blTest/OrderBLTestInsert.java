@@ -35,7 +35,7 @@ public class OrderBLTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderBL orderBL = new OrderBL();
-            boolean result = orderBL.insertOrder(order);
+            boolean result = orderBL.createOrder(order);
             boolean expected = true;
             assertTrue(result == expected);
 
@@ -66,7 +66,7 @@ public class OrderBLTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderBL orderBL = new OrderBL();
-            boolean result = orderBL.insertOrder(order);
+            boolean result = orderBL.createOrder(order);
             boolean expected = false;
             assertTrue(result == expected);
 
@@ -97,7 +97,7 @@ public class OrderBLTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderBL orderBL = new OrderBL();
-            boolean result = orderBL.insertOrder(order);
+            boolean result = orderBL.createOrder(order);
             boolean expected = false;
             assertTrue(result == expected);
 
@@ -127,7 +127,7 @@ public class OrderBLTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderBL orderBL = new OrderBL();
-            boolean result = orderBL.insertOrder(order);
+            boolean result = orderBL.createOrder(order);
             boolean expected = false;
             assertTrue(result == expected);
 
@@ -160,7 +160,7 @@ public class OrderBLTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderBL orderBL = new OrderBL();
-            boolean result = orderBL.insertOrder(order);
+            boolean result = orderBL.createOrder(order);
             boolean expected = false;
             assertTrue(result == expected);
 
@@ -191,7 +191,7 @@ public class OrderBLTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderBL orderBL = new OrderBL();
-            boolean result = orderBL.insertOrder(order);
+            boolean result = orderBL.createOrder(order);
             boolean expected = false;
             assertTrue(result == expected);
 
@@ -221,7 +221,7 @@ public class OrderBLTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderBL orderBL = new OrderBL();
-            boolean result = orderBL.insertOrder(order);
+            boolean result = orderBL.createOrder(order);
             boolean expected = false;
             assertTrue(result == expected);
 
@@ -251,7 +251,7 @@ public class OrderBLTestInsert {
             order.setCustomer(customer);
             order.setProducts(products);
             OrderBL orderBL = new OrderBL();
-            boolean result = orderBL.insertOrder(order);
+            boolean result = orderBL.createOrder(order);
             boolean expected = false;
             assertTrue(result == expected);
 
