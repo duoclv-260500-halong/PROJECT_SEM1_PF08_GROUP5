@@ -13,7 +13,7 @@ public class ProductBL {
     public boolean updateProductBL(Product product, int productID){
         return productDAL.updateProductDAL(product, productID) > 0;
     }
-    public ArrayList<Product> getByCategory(int categoryID){
+    public ArrayList<Product> getProductByCategory(int categoryID){
         return productDAL.getProductByCategory(categoryID);
     } 
     public Product getProductByID(int productID){   
