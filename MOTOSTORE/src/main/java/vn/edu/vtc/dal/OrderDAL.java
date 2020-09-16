@@ -103,7 +103,7 @@ public class OrderDAL {
         }
         return listOrder;
     }
-    public int insertOrder(Order order) {
+    public int createOrder(Order order) {
         if (order.getProducts() == null || order.getProducts().isEmpty()) {
             return 0;
         }
