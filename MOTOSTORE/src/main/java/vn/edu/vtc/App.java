@@ -67,7 +67,6 @@ public class App {
                     break;
                 }
                 case 2: {
-
                     updateProduct();
                     break;
                 }
@@ -80,6 +79,7 @@ public class App {
                     break;
                 }
                 case 0: {
+                    clrscr();
                     System.exit(0);
                 }
             }
@@ -144,9 +144,11 @@ public class App {
                 }
                 user = userBL.getUser(username, password);
                 if (user != null) {
+                    clrscr();
                     System.out.println("Login successfully\n");
                     break;
                 } else {
+                    clrscr();
                     System.out.println("Username or Password not correct\n");
                 }
             }
@@ -242,17 +244,20 @@ public class App {
             String confirm = scanner.nextLine();
             if (confirm.equalsIgnoreCase("yes")) {
                 if (productBL.insertProductBL(product)) {
+                    clrscr();
                     System.out.println("Insert completed!\n");
                 } else {
+                    clrscr();
                     System.out.println("Insert failed!\n");
                     System.out.println("Product already exists! (Name)\n");
                 }
             } else {
-
+                clrscr();
                 System.out.println("Canceled insert!\n");
             }
             System.out.print("Do you want to insert another products? (Yes/No): ");
             String confirm1 = scanner.nextLine();
+            clrscr();
             if (confirm1.equalsIgnoreCase("no")) {
                 break;
             }
@@ -260,7 +265,6 @@ public class App {
     }
 
     public static void updateProduct() {
-
         while (true) {
             int categoryID = printMenu(menuUpdate, 4);
             switch (categoryID) {
@@ -275,7 +279,7 @@ public class App {
             System.out.println("|--------Update Product--------|");
             ProductBL productBL = new ProductBL();
             ArrayList<Product> listProducts = new ArrayList<>();
-            listProducts = productBL.getByCategory(categoryID);
+            listProducts = productBL.getProductByCategory(categoryID);
             if (listProducts.size() > 0) {
 
                 int productID = printListProduct(listProducts, listProducts.size());
@@ -343,9 +347,11 @@ public class App {
                     String confirm = scanner.nextLine();
                     if (confirm.equalsIgnoreCase("yes")) {
                         if (productBL.updateProductBL(product, product.getProductID())) {
+                            clrscr();
                             System.out.println("Update completed!\n");
                         } else {
-                            System.out.println("Update failed!\n");
+                            clrscr();
+                            System.out.println("Update failed!");
                             System.out.println("This product is same name as another product!\n");
                         }
                     } else {
@@ -361,6 +367,7 @@ public class App {
             }
             System.out.print("Do you want to update another product? (Yes/No): ");
             String confirm = scanner.nextLine();
+            clrscr();
             if (confirm.equalsIgnoreCase("no")) {
                 break;
             }
@@ -460,6 +467,7 @@ public class App {
                     }
                 }
                 case "0": {
+                    clrscr();
                     return -1;
                 }
                 default: {
@@ -545,6 +553,7 @@ public class App {
                     }
                 }
                 case "0": {
+                    clrscr();
                     return -1;
                 }
                 default: {
@@ -582,7 +591,7 @@ public class App {
             }
             ArrayList<Product> listProducts = new ArrayList<>();
             ProductBL productBL = new ProductBL();
-            listProducts = productBL.getByCategory(categoryID);
+            listProducts = productBL.getProductByCategory(categoryID);
             if (listProducts.size() > 0) {
                 while (true) {
                     int productID = printListProduct(listProducts, listProducts.size());
@@ -616,7 +625,8 @@ public class App {
         if (confirm.equals("yes")) {
             order.setOrderStatus(1);
             OrderBL orderBL = new OrderBL();
-            if (orderBL.insertOrder(order)) {
+            if (orderBL.createOrder(order)) {
+                clrscr();
                 System.out.println("Create successfully");
                 System.out.println("Your order");
                 System.out.println(
@@ -639,6 +649,7 @@ public class App {
                 System.out.println("Create failed");
             }
         } else {
+            clrscr();
             System.out.println("Canceled order creation");
         }
     }
@@ -874,10 +885,12 @@ public class App {
                     String confirm = scanner.nextLine();
                     if (confirm.equalsIgnoreCase("yes")) {
                         if (customerBL.updateCustomer(customer, customerID)) {
+                            clrscr();
                             System.out.println("Update completed!\n");
                             
                             break;
                         } else {
+                            clrscr();
                             System.out.println("Update failed");
                             System.out.print("Do you want to update again? (Yes/No): ");
                             String confirm1 = scanner.nextLine();
@@ -894,6 +907,7 @@ public class App {
                     System.out.println("Update failed");
                     System.out.print("Do you want to update again? (Yes/No): ");
                     String confirm = scanner.nextLine();
+                    clrscr();
                     if (confirm.equalsIgnoreCase("no")) {
                         break;
                     }
@@ -904,6 +918,7 @@ public class App {
                 System.out.print("Customer not found \n");
                 System.out.print("Do you want to update again? (Yes/No): ");
                 String confirm = scanner.nextLine();
+                clrscr();
                 if (confirm.equalsIgnoreCase("no")) {
                     break;
                 }
@@ -982,13 +997,16 @@ public class App {
             order.setProducts(productsToUpdate);
             if (orderDetailsBL.updateOrderDetails(order, order.getOrderID())
                     && orderBL.updateOrder(order.getOrderID(), order.getOrderStatus(), reasonUpdate)) {
+                        clrscr();
                 System.out.println(" Update completed");
                 order.setProducts(productsToPrint);
                 showOrder(order);
             } else {
+                clrscr();
                 System.out.println(" Update failed");
             }
         } else {
+            clrscr();
             System.out.println("Canceled update order");
         }
     }
