@@ -12,9 +12,9 @@ public class OrderBL {
     public Order getByID(int orderID){
         return orderDAL.getByID(orderID);
     }
-    public boolean insertOrder(Order order){
+    public boolean createOrder(Order order){
         
-        return orderDAL.insertOrder(order) > 0;
+        return orderDAL.createOrder(order) > 0;
     }
     public boolean updateOrder(int orderID, int orderStatus, String reasonUpdate){
         return orderDAL.updateOrder(orderID, orderStatus, reasonUpdate) > 0;
