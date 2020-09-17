@@ -84,6 +84,7 @@ public class OrderDAL {
             Order order = new Order();
             order.setOrderID(rs.getInt("orderID"));
             order.getCustomer().setCustomerID(rs.getInt("customerID"));
+            order.setTimeCreate(rs.getTimestamp("timeCreate"));
             try (PreparedStatement pstm1 = con.prepareStatement("select customerName from Customers where customerID = ?")){
                 pstm1.setInt(1, order.getCustomer().getCustomerID());
                 ResultSet rs1 = pstm1.executeQuery();
