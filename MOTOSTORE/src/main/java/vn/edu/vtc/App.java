@@ -111,10 +111,10 @@ public class App {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (choice < 0 || choice > limitChoice) {
-                    System.out.println("Choice 0 - " + limitChoice);
+                    System.out.println("Choice: 0 - " + limitChoice);
                 }
             } catch (Exception e) {
-                System.out.println("Choice 0 - " + limitChoice);
+                System.out.println("Choice: 0 - " + limitChoice);
                 continue;
             }
         } while (choice < 0 || choice > limitChoice);
@@ -289,75 +289,81 @@ public class App {
                 Product product = getProductByID(productID);
                 if (product != null) {
                     showProduct(product);
-                    System.out.println("Input new information: ");
-                    System.out.print("Product Name: ");
-                    product.setProductName(scanner.nextLine());
-                    while (product.getProductName() == null || product.getProductName().equals("")) {
-                        System.out.println("Product name must not empty");
+                    System.out.print("Do you want to update this product? (Yes/No): ");
+                    String confirm = scanner.nextLine();
+                    if (confirm.equalsIgnoreCase("yes")) {
+                        System.out.println("Input new information: ");
                         System.out.print("Product Name: ");
                         product.setProductName(scanner.nextLine());
-                    }
-                    System.out.print("Description: ");
-                    product.setDescription(scanner.nextLine());
-                    while (product.getDescription() == null || product.getDescription().equals("")) {
-                        System.out.println("Description must not empty");
+                        while (product.getProductName() == null || product.getProductName().equals("")) {
+                            System.out.println("Product name must not empty");
+                            System.out.print("Product Name: ");
+                            product.setProductName(scanner.nextLine());
+                        }
                         System.out.print("Description: ");
                         product.setDescription(scanner.nextLine());
-                    }
-                    while (true) {
-                        try {
-                            System.out.print("Price: ");
-                            product.setPrice(Long.valueOf(scanner.nextLine()));
-                            if (!(product.getPrice() > 0)) {
+                        while (product.getDescription() == null || product.getDescription().equals("")) {
+                            System.out.println("Description must not empty");
+                            System.out.print("Description: ");
+                            product.setDescription(scanner.nextLine());
+                        }
+                        while (true) {
+                            try {
+                                System.out.print("Price: ");
+                                product.setPrice(Long.valueOf(scanner.nextLine()));
+                                if (!(product.getPrice() > 0)) {
+                                    System.out.println("Price must > 0");
+                                    continue;
+                                }
+                                break;
+
+                            } catch (Exception e) {
+
                                 System.out.println("Price must > 0");
                                 continue;
                             }
-                            break;
-
-                        } catch (Exception e) {
-
-                            System.out.println("Price must > 0");
-                            continue;
                         }
-                    }
-                    System.out.print("Size: ");
-                    product.setSize(scanner.nextLine());
-                    while (product.getSize() == null || product.getSize().equals("")) {
-                        System.out.println("Size must not empty");
                         System.out.print("Size: ");
                         product.setSize(scanner.nextLine());
-                    }
-                    System.out.print("Color: ");
-                    product.setColor(scanner.nextLine());
-                    while (product.getColor() == null || product.getColor().equals("")) {
-                        System.out.println("Color must not empty");
+                        while (product.getSize() == null || product.getSize().equals("")) {
+                            System.out.println("Size must not empty");
+                            System.out.print("Size: ");
+                            product.setSize(scanner.nextLine());
+                        }
                         System.out.print("Color: ");
                         product.setColor(scanner.nextLine());
-                    }
-                    System.out.print("Time Warranty: ");
-                    product.setTimeWarranty(scanner.nextLine());
-                    while (product.getTimeWarranty() == null || product.getTimeWarranty().equals("")) {
-                        System.out.println("Time Warranty must not empty");
+                        while (product.getColor() == null || product.getColor().equals("")) {
+                            System.out.println("Color must not empty");
+                            System.out.print("Color: ");
+                            product.setColor(scanner.nextLine());
+                        }
                         System.out.print("Time Warranty: ");
                         product.setTimeWarranty(scanner.nextLine());
-                    }
-                    System.out.println("--------------------------------");
-                    showProduct(product);
-                    System.out.print("Are you already update this product? (Yes/No): ");
-                    String confirm = scanner.nextLine();
-                    if (confirm.equalsIgnoreCase("yes")) {
-                        if (productBL.updateProductBL(product, product.getProductID())) {
-                            clrscr();
-                            System.out.println("Update completed!\n");
-                        } else {
-                            clrscr();
-                            System.out.println("Update failed!");
-                            System.out.println("This product is same name as another product!\n");
+                        while (product.getTimeWarranty() == null || product.getTimeWarranty().equals("")) {
+                            System.out.println("Time Warranty must not empty");
+                            System.out.print("Time Warranty: ");
+                            product.setTimeWarranty(scanner.nextLine());
                         }
-                    } else {
+                        System.out.println("--------------------------------");
+                        showProduct(product);
+                        System.out.print("Are you already update this product? (Yes/No): ");
+                        String confirm1 = scanner.nextLine();
+                        if (confirm1.equalsIgnoreCase("yes")) {
+                            if (productBL.updateProductBL(product, product.getProductID())) {
+                                clrscr();
+                                System.out.println("Update completed!\n");
+                            } else {
+                                clrscr();
+                                System.out.println("Update failed!");
+                                System.out.println("This product is same name as another product!\n");
+                            }
+                        } else {
+                            System.out.println("Canceled update!\n");
+                        }
+                    }   
+                    else{
                         System.out.println("Canceled update!\n");
                     }
-
                 } else {
                     System.out.println("productID not correct, please choose again");
                 }
@@ -402,10 +408,10 @@ public class App {
             for (int j = i * 10 - 9; j <= i * 10; j++) {
 
                 try {
-                    System.out.format("|%6d |%41s |%14d VND |%15s |%15s |%16s |\n", listProducts.get(j - 1).getProductID(),
-                            listProducts.get(j - 1).getProductName(), listProducts.get(j - 1).getPrice(),
-                            listProducts.get(j - 1).getSize(), listProducts.get(j - 1).getColor(),
-                            listProducts.get(j - 1).getTimeWarranty());
+                    System.out.format("|%6d |%41s |%14d VND |%15s |%15s |%16s |\n",
+                            listProducts.get(j - 1).getProductID(), listProducts.get(j - 1).getProductName(),
+                            listProducts.get(j - 1).getPrice(), listProducts.get(j - 1).getSize(),
+                            listProducts.get(j - 1).getColor(), listProducts.get(j - 1).getTimeWarranty());
 
                 } catch (Exception e) {
                     break;
@@ -483,22 +489,19 @@ public class App {
         int orderID;
         int maxPage = (int) Math.ceil(((double) sizeListOrder + 1) / 10);
         for (int i = 1;; i++) {
-            System.out.println(
-                    "--------------------------------------");
-            System.out.println(
-                    "| ID Order |      Name Customer      |");
-            System.out.println(
-                    "------------------------------------- ");
+            System.out.println("--------------------------------------------------------------");
+            System.out.println("| ID Order |      Name Customer      |      Time Create      |");
+            System.out.println("--------------------------------------------------------------");
             for (int j = i * 10 - 9; j <= i * 10; j++) {
 
                 try {
-                    System.out.format("|%10d|%25s|\n", listOrder.get(j - 1).getOrderID(), listOrder.get(j-1).getCustomer().getCustomerName());
+                    System.out.format("|%10d|%25s|%23s|\n", listOrder.get(j - 1).getOrderID(),
+                            listOrder.get(j - 1).getCustomer().getCustomerName(), listOrder.get(j - 1).getTimeCreate());
                 } catch (Exception e) {
                     break;
                 }
             }
-            System.out.println(
-                "------------------------------------- ");
+            System.out.println("--------------------------------------------------------------");
             System.out.println("Page: " + i + "/" + maxPage);
             System.out.println("1. Previous page");
             System.out.println("2. Next page");
@@ -564,6 +567,7 @@ public class App {
             }
         }
     }
+
     public static Product getProductByID(int productID) {
         ProductBL productBL = new ProductBL();
         Product product = productBL.getProductByID(productID);
@@ -734,77 +738,81 @@ public class App {
                 "-----------------------------------------------------------------------------------------------------------");
         long total = 0;
         for (Product product : order.getProducts()) {
-            System.out.format("|%7d|%45s |%14d VND |%13d |%10d VND |\n", product.getProductID(), product.getProductName(),
-                    product.getPrice(), product.getQuantity(), product.getPrice() * product.getQuantity());
+            System.out.format("|%7d|%45s |%14d VND |%13d |%10d VND |\n", product.getProductID(),
+                    product.getProductName(), product.getPrice(), product.getQuantity(),
+                    product.getPrice() * product.getQuantity());
             total += product.getPrice() * product.getQuantity();
         }
         System.out.println(
                 "-----------------------------------------------------------------------------------------------------------");
-        System.out
-                .format("|                                                                            Total price: %11d VND |\n"
-                        ,total);
+        System.out.format(
+                "|                                                                            Total price: %11d VND |\n",
+                total);
 
         System.out.println(
                 "-----------------------------------------------------------------------------------------------------------");
     }
 
-    public static ArrayList<Order> getAllOrder(){
+    public static ArrayList<Order> getAllOrder() {
         ArrayList<Order> listOrder = new ArrayList<>();
         OrderBL orderBL = new OrderBL();
         listOrder = orderBL.getAllOrder();
         return listOrder;
     }
+
     public static void updateOrder() {
         ArrayList<Order> listOrder = new ArrayList<>();
         listOrder = getAllOrder();
-        if(listOrder.size()>0){
-        while(true){
-            int choice = printListOrder(listOrder, listOrder.size());
-            if(choice==-1){
-                break;
-            }
-            
-            Order order = getOrderByID(choice);
-            Date date = new Date();
-        if (order != null) {
-            showOrder(order);
-            if (order.getTimeCreate().getDate() == date.getDate() && order.getTimeCreate().getMonth() == date.getMonth()
-                    && order.getTimeCreate().getYear() == date.getYear()) {
-                System.out.print("Do you want to update this order? (Yes/No): ");
-                String confirm = scanner.nextLine();
-                if (confirm.equals("yes")) {
-                    System.out.println("--------------------------------");
-                    System.out.println("|-------Menu Update Order------|");
-                    System.out.println("| 1. Customer                  |");
-                    System.out.println("| 2. List Products             |");
-                    System.out.println("--------------------------------");
-                    System.out.print("Update?(1/2): ");
-                    int choice1 = Integer.valueOf(scanner.nextLine());
-                    switch (choice1) {
-                        case 1: {
-                            updateCustomer();
-                            break;
+        if (listOrder.size() > 0) {
+            while (true) {
+                int choice = printListOrder(listOrder, listOrder.size());
+                if (choice == -1) {
+                    break;
+                }
+
+                Order order = getOrderByID(choice);
+                Date date = new Date();
+                if (order.getOrderID() > 0) {
+                    showOrder(order);
+                    if (order.getTimeCreate().getDate() == date.getDate()
+                            && order.getTimeCreate().getMonth() == date.getMonth()
+                            && order.getTimeCreate().getYear() == date.getYear()) {
+                        System.out.print("Do you want to update this order? (Yes/No): ");
+                        String confirm = scanner.nextLine();
+                        if (confirm.equals("yes")) {
+                            System.out.println("--------------------------------");
+                            System.out.println("|-------Menu Update Order------|");
+                            System.out.println("| 1. Customer                  |");
+                            System.out.println("| 2. List Products             |");
+                            System.out.println("--------------------------------");
+                            System.out.print("Update?(1/2): ");
+                            int choice1 = Integer.valueOf(scanner.nextLine());
+                            switch (choice1) {
+                                case 1: {
+                                    updateCustomer();
+                                    break;
+                                }
+                                case 2: {
+                                    updateProductInOrder(order.getProducts(), order.getOrderID());
+                                    break;
+                                }
+                            }
                         }
-                        case 2: {
-                            updateProductInOrder(order.getProducts(), order.getOrderID());
+                    } else {
+                        System.out.println("This order is not created today, can't update!");
+                        System.out.print("Do you want to update order continue? (Yes/No): ");
+                        String confirm = scanner.nextLine();
+                        if (confirm.equalsIgnoreCase("yes")) {
+                            continue;
+                        } else {
                             break;
                         }
                     }
-                }
-            } else {
-                System.out.println("This order is not created today, can't update!");
-                System.out.print("Do you want to update order continue? (Yes/No): ");
-                String confirm = scanner.nextLine();
-                if(confirm.equalsIgnoreCase("yes")){
+                } else {
                     continue;
                 }
-                else{
-                    break;
-                }
             }
-        }
-        }}
-        else{
+        } else {
             System.out.println("The store has no invoices!");
         }
     }
@@ -814,16 +822,16 @@ public class App {
         OrderBL orderBL = new OrderBL();
         do {
             try {
-                
                 order = orderBL.getByID(orderID);
                 if (order.getOrderID() == orderID) {
                     break;
                 } else {
                     System.out.print("Order not found!\n");
-                    
+                    break;
                 }
             } catch (Exception e) {
                 System.out.print("Order not found!\n");
+                break;
             }
         } while (true);
         return order;
@@ -887,7 +895,7 @@ public class App {
                         if (customerBL.updateCustomer(customer, customerID)) {
                             clrscr();
                             System.out.println("Update completed!\n");
-                            
+
                             break;
                         } else {
                             clrscr();
@@ -897,7 +905,7 @@ public class App {
                             if (confirm1.equalsIgnoreCase("no")) {
                                 break;
                             }
-                            
+
                         }
                     } else {
                         System.out.println("Canceled customer update!");
@@ -930,7 +938,7 @@ public class App {
         Order order = new Order();
         order.setOrderID(orderID);
         ArrayList<Product> productsToUpdate = listProductsInOrder;
-        
+
         System.out.print("Reason to update: ");
         String reasonUpdate = scanner.nextLine();
         OrderBL orderBL = new OrderBL();
@@ -965,7 +973,7 @@ public class App {
                         }
 
                     }
-        
+
                     if (count == 1) {
                         order.setProducts(productsToUpdate);
                         showOrder(order);
@@ -976,7 +984,7 @@ public class App {
                     System.out.print("ProductID must > 0 ");
                     continue;
                 }
-                
+
             } else if (choice == 0) {
                 for (Product product : productsToUpdate) {
                     if (product.getQuantity() > 0) {
@@ -986,9 +994,9 @@ public class App {
                 order.setProducts(productsToPrint);
                 break;
             }
-            
+
         }
-        
+
         showOrder(order);
         System.out.print("  Are you already update this order (Yes/No): ");
         String confirm = scanner.nextLine();
@@ -997,7 +1005,7 @@ public class App {
             order.setProducts(productsToUpdate);
             if (orderDetailsBL.updateOrderDetails(order, order.getOrderID())
                     && orderBL.updateOrder(order.getOrderID(), order.getOrderStatus(), reasonUpdate)) {
-                        clrscr();
+                clrscr();
                 System.out.println(" Update completed");
                 order.setProducts(productsToPrint);
                 showOrder(order);
